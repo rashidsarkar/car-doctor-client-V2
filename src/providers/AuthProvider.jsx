@@ -13,7 +13,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -42,13 +42,13 @@ const AuthProvider = ({ children }) => {
       // if user exixts then issue a token
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", loggedUser, {
+          .post("https://car-doctor-server-v2.vercel.app/jwt", loggedUser, {
             withCredentials: true,
           })
           .then((res) => console.log("token response", res.data));
       } else {
         axios
-          .post("http://localhost:5000/logout", loggedUser, {
+          .post("https://car-doctor-server-v2.vercel.app/logout", loggedUser, {
             withCredentials: true,
           })
           .then((res) => console.log(res.data));
